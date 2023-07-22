@@ -1,0 +1,11 @@
+.mainBox {
+  text-align: center;
+  background-color: rgb(87, 0, 130);
+  color: white;
+  margin-top: 10rem;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  width: 50%;
+  left: 25%;
+  right: 25%;
+}
