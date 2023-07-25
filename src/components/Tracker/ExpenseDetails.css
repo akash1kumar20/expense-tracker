@@ -1,0 +1,20 @@
+.firstRow {
+  border-bottom: 2px solid white;
+  font-weight: bolder;
+  color: black;
+}
+.borderC {
+  border-left: 2px solid white;
+}
+.trash {
+  text-align: left;
+  color: rgb(145, 0, 0);
+  border: 1px solid white;
+  border-radius: 35%;
+}
+.pen {
+  text-align: left;
+  color: rgb(255, 179, 15);
+  border: 1px solid white;
+  border-radius: 35%;
+}

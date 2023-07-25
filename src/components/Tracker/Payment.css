@@ -1,0 +1,26 @@
+.blue {
+  background-color: blue;
+  color: white;
+  border: 3px solid white;
+}
+.red {
+  background-color: rgb(149, 7, 7);
+  color: white;
+  border: 3px solid white;
+}
+.yellow {
+  background-color: rgb(255, 165, 0);
+  color: white;
+  border: 3px solid white;
+}
+.white {
+  background-color: rgb(75, 7, 72);
+  color: white;
+  border: 3px solid white;
+}
+.plus {
+  background-color: white;
+  color: rgb(75, 7, 72);
+  border-radius: 50%;
+  padding: 1px;
+}

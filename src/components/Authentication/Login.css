@@ -1,11 +1,40 @@
 .mainBox {
   text-align: center;
-  background-color: rgb(87, 0, 130);
+  background-color: rgba(87, 0, 130, 0.8);
   color: white;
-  margin-top: 10rem;
+  margin-top: 6rem;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   width: 50%;
   left: 25%;
   right: 25%;
+  border: 3px solid rgb(0, 0, 0);
+}
+@media only screen and (max-width: 600px) {
+  .mainBox {
+    margin-top: 0rem;
+    width: 100%;
+  }
+}
+.headingStyle {
+  padding-top: 0.5rem;
+  border-bottom: 2px solid rgb(6, 0, 0);
+  padding-bottom: 3px;
+}
+input {
+  border-radius: 1rem;
+  width: 80%;
+  right: 15%;
+  left: 15%;
+  border: 3px solid black;
+  padding: 7px;
+}
+.btn {
+  border: 2px solid black;
+  border-radius: 1.5rem;
+  font-size: larger;
+  font-weight: bolder;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }

@@ -1,0 +1,36 @@
+select {
+  border: 2px solid white;
+  margin-top: 2px;
+  border-radius: 1rem;
+  background-color: black;
+  color: white;
+  padding: 5px;
+}
+select:hover {
+  zoom: 120%;
+  cursor: pointer;
+}
+input:hover {
+  zoom: 120%;
+}
+.expenseBtn {
+  border: 2px solid white;
+  padding: 10px;
+}
+@media only screen and (max-width: 1000px) {
+  .expenseBtn {
+    border: 2px solid white;
+    padding: 1px;
+    font-size: medium;
+    margin-left: 3px;
+  }
+  select {
+    border: 2px solid white;
+    margin-top: 2px;
+    border-radius: 0.5rem;
+    background-color: black;
+    color: white;
+    padding: 1px;
+    margin-right: 5px;
+  }
+}
