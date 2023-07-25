@@ -1,10 +1,10 @@
 import React from "react";
-
+import imgToUse from "./../../images/EXPENSES-Large-Banner-Desktop-V2.png";
 const WelcomePage = () => {
   return (
-    <div>
-      <h1>This is home page</h1>
-    </div>
+    <>
+      <img src={imgToUse} />
+    </>
   );
 };
 

@@ -18,3 +18,10 @@
   border: 1px solid white;
   border-radius: 35%;
 }
+.empty {
+  text-align: center;
+  margin-top: 1rem;
+  padding: 5rem;
+  background-color: bisque;
+  color: black;
+}
