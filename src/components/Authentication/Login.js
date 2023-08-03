@@ -35,8 +35,8 @@ const Login = () => {
         return alert("Password Not Match, please enter same password");
       }
     }
-
     localStorage.setItem("userEmail", userEmail);
+
     setIsLoading(true);
     let url;
     if (isLogin) {
@@ -60,8 +60,10 @@ const Login = () => {
       {
         isLogin ? alert(`Welcome Back`) : alert(`Welcome`);
       }
+      {
+        isLogin ? navigate("/") : navigate("/profile");
+      }
       setIsLoading(false);
-      navigate("/");
     } catch (err) {
       console.log(err);
       alert("Request Failed");

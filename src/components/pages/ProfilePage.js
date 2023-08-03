@@ -21,7 +21,8 @@ const ProfilePage = () => {
     autCtx.logOut();
     navigate("/login");
   };
-  const user = localStorage.getItem("userEmail");
+  const userEmail = localStorage.getItem("userEmail");
+
   return (
     <div className="container mt-2 profile">
       <h1>User Profie</h1>
@@ -30,9 +31,11 @@ const ProfilePage = () => {
           <p>
             <img src={imgToUse} width="200px" height="200px" />
           </p>
-          <p className="ms-4">User: {user}</p>
+          <p className="ms-4">User: {userEmail}</p>
+          <p className="text-danger">Please Complete Your Profile</p>
+
           <p>
-            <input type="file" />
+            <input type="file" name="fileUpload" />
             <input type="submit" value="Change Profile Photo" />
           </p>
           <p>
@@ -65,10 +68,7 @@ const ProfilePage = () => {
           aspernatur laborum recusandae dicta distinctio numquam fuga. Lorem
           ipsum dolor sit amet consectetur adipisicing elit. Aperiam magnam
           impedit quisquam aut velit. Ullam eveniet voluptates neque sunt culpa
-          repellat, aspernatur voluptas est adipisci, natus necessitatibus qui.
-          Iste itaque alias, a error fuga voluptates. Voluptas facere quam eum
-          a, assumenda reiciendis doloribus quis facilis beatae, magni illum
-          autem eius!
+          repellat.
           <div className="row justify-content-center">
             <div className="col-4 mt-3">
               <button className="btn btn-danger btn-lg" onClick={logOut}>
