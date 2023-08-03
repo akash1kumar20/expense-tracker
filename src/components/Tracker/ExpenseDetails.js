@@ -7,10 +7,17 @@ const ExpenseDetails = () => {
   const [expenseData, setExpenseData] = useState([]);
 
   useEffect(() => {
+    const emailValue = localStorage.getItem("userEmail");
+    let changeEmail;
+    if (emailValue === null) {
+      changeEmail = 0;
+    } else {
+      changeEmail = emailValue.replace("@", "").replace(".", "");
+    }
     const fetchData = async () => {
       try {
         let res = await axios.get(
-          "https://expense-tracker-887e6-default-rtdb.firebaseio.com/expense.json"
+          ` https://expense-tracker-887e6-default-rtdb.firebaseio.com/expense${changeEmail}.json`
         );
         let data = Object.values(res.data);
         setExpenseData(data);

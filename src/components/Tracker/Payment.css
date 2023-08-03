@@ -24,3 +24,9 @@
   border-radius: 50%;
   padding: 1px;
 }
+.selectAll {
+  background-color: white;
+  color: rgb(15, 49, 129);
+  text-align: center;
+  text-decoration: underline;
+}

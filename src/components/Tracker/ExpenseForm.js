@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./ExpenseForm.css";
 import axios from "axios";
 const ExpenseForm = () => {
@@ -11,9 +11,17 @@ const ExpenseForm = () => {
       payment: event.target.payment.value,
       id: Math.random(),
     };
+    let emailValue = localStorage.getItem("userEmail");
+    let changeEmail;
+    if (emailValue === null) {
+      changeEmail = 0;
+    } else {
+      changeEmail = emailValue.replace("@", "").replace(".", "");
+    }
+
     try {
       let res = await axios.post(
-        "https://expense-tracker-887e6-default-rtdb.firebaseio.com/expense.json",
+        ` https://expense-tracker-887e6-default-rtdb.firebaseio.com/expense${changeEmail}.json`,
         expense
       );
       console.log(res);

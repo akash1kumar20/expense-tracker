@@ -1,0 +1,22 @@
+.notFound {
+  padding: 6rem;
+  text-align: center;
+  margin-top: 5px;
+  background-color: white;
+  color: black;
+}
+.alert {
+  color: rgb(202, 8, 8);
+}
+.worry {
+  font-size: larger;
+  background-color: rgb(15, 0, 0);
+  color: white;
+  border-radius: 45%;
+}
+.wink {
+  font-size: x-large;
+  background-color: blue;
+  color: white;
+  border-radius: 45%;
+}

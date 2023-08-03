@@ -1,0 +1,10 @@
+.profile {
+  text-align: center;
+}
+.row1 {
+  border: 3px solid white;
+  padding: 25px;
+  padding-bottom: 10px;
+  text-align: justify;
+  padding-left: 5rem;
+}
