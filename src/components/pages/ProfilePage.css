@@ -20,3 +20,8 @@
   background-color: white;
   max-width: max-content;
 }
+.profileImage {
+  border-radius: 10rem;
+  height: 200px;
+  width: 200px;
+}

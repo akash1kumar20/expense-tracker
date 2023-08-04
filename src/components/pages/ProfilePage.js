@@ -7,8 +7,8 @@ import AuthContext from "../../data_room/auth-context";
 const ProfilePage = () => {
   const [showUpdatedData, setShowUpdatedData] = useState([]);
   const [showMessage, setShowMessage] = useState("");
-  const urlRef = useRef();
   const nameRef = useRef();
+  const urlRef = useRef();
   const autCtx = useContext(AuthContext);
   const isLogIn = autCtx.isLoggedIn;
   const navigate = useNavigate();
@@ -63,7 +63,7 @@ const ProfilePage = () => {
     } catch (err) {
       console.log(err);
     }
-    urlRef.current.value = "";
+
     nameRef.current.value = "";
   };
   const verifyEmail = async (e) => {
@@ -79,8 +79,6 @@ const ProfilePage = () => {
       );
       console.log(res);
       setShowMessage("Please check your mail to verify email!");
-      localStorage.setItem("userEmail", true);
-      //once the user is verified then id will remain store in local storage.
     } catch (err) {
       console.log(err.message);
     }
@@ -108,9 +106,9 @@ const ProfilePage = () => {
           showUpdatedData.map((data) => (
             <div className="col-md-4" key={data.localId}>
               <p>
-                <img src={imgToUse} width="200px" height="200px" />
+                <img src={`${data.photoUrl}`} className="profileImage" />
               </p>
-              <p className="ms-4">Id: {userEmail}</p>
+              <p className="ms-4">Id: {data.email}</p>
               <p className="ms-4">User: {data.displayName}</p>
               <p className="ms-4 updated ps-2 pe-2">Profile Updated</p>
 
@@ -143,7 +141,7 @@ const ProfilePage = () => {
                 />
                 <input
                   type="text"
-                  placeholder="Please Paste Image URL"
+                  placeholder="Enter Your Picture Url"
                   required
                   ref={urlRef}
                 />

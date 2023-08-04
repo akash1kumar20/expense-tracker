@@ -33,7 +33,7 @@ function App() {
   };
   return (
     <ThemeChanger.Provider value={{ theme, toggleTheme }}>
-      <div id={theme} className="App">
+      <div id={theme} className="container-fluid App">
         {/* setting id dynamically */}
         <RouterProvider router={router} />
       </div>
