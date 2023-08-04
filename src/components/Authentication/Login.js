@@ -13,7 +13,6 @@ const Login = () => {
   const autCtx = useContext(AuthContext);
   const emailRef = useRef();
   const passwordRef = useRef();
-  const nameRef = useRef();
   const confirmpasswordRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
   //to handle the situation when request is in progress.
@@ -22,12 +21,10 @@ const Login = () => {
     let userEmail;
     let userPassword;
     let confirmpassword;
-    let userName;
     if (isLogin) {
       userEmail = emailRef.current.value;
       userPassword = passwordRef.current.value;
     } else {
-      userName = nameRef.current.value;
       userEmail = emailRef.current.value;
       userPassword = passwordRef.current.value;
       confirmpassword = confirmpasswordRef.current.value;
@@ -36,7 +33,6 @@ const Login = () => {
       }
     }
     localStorage.setItem("userEmail", userEmail);
-
     setIsLoading(true);
     let url;
     if (isLogin) {
@@ -77,26 +73,6 @@ const Login = () => {
         <h2>{isLogin ? "Login" : "Signup"}</h2>
       </div>
       <form onSubmit={submitHandler}>
-        {!isLogin && (
-          <div className="row">
-            <label htmlFor="name">
-              <h5>Name:</h5>
-            </label>
-          </div>
-        )}
-        {!isLogin && (
-          <div className="row  mt-2 mb-2 justify-content-center">
-            <div className="col-10">
-              <input
-                type="text"
-                required
-                id="name"
-                ref={nameRef}
-                placeholder="Your Name"
-              ></input>
-            </div>
-          </div>
-        )}
         <div className="row">
           <label htmlFor="email">
             <h5>Email:</h5>
