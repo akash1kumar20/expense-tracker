@@ -8,6 +8,7 @@ import WelcomePage from "./components/pages/WelcomePage";
 import Root from "./components/pages/Root";
 import NotFoundPage from "./components/pages/NotFoundPage";
 import ChangePassword from "./components/Authentication/ChangePassword";
+import ForgotPassword from "./components/Authentication/ForgotPassword";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
       { path: "expense", element: <ExpensePage /> },
       { path: "login", element: <LoginPage /> },
       { path: "changePassword", element: <ChangePassword /> },
+      { path: "forgotPassword", element: <ForgotPassword /> },
       { path: "/*", element: <NotFoundPage /> },
     ],
   },

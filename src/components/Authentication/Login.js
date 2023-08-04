@@ -67,6 +67,9 @@ const Login = () => {
       navigate("/login");
     }
   };
+  const forgotPassword = () => {
+    navigate("/forgotPassword");
+  };
   return (
     <div className="container mainBox mt-2">
       <div className="row mb-3 headingStyle">
@@ -78,7 +81,7 @@ const Login = () => {
             <h5>Email:</h5>
           </label>
         </div>
-        <div className="row  mt-2 mb-2 justify-content-center">
+        <div className="row mt-2 mb-2 justify-content-center">
           <div className="col-10">
             <input
               type="email"
@@ -105,6 +108,11 @@ const Login = () => {
               placeholder="Enter Password"
             ></input>
           </div>
+          {isLogin && (
+            <span className="mt-2 text-warning" onClick={forgotPassword}>
+              Forgot Password?
+            </span>
+          )}
         </div>
         {!isLogin && (
           <div className="row">

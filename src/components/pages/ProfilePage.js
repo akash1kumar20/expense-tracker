@@ -31,7 +31,7 @@ const ProfilePage = () => {
   };
   const logOut = () => {
     autCtx.logOut();
-    navigate("/expense");
+    navigate("/login");
   };
   const updateProfile = async (event) => {
     event.preventDefault();
@@ -63,7 +63,7 @@ const ProfilePage = () => {
     } catch (err) {
       console.log(err);
     }
-
+    urlRef.current.value = "";
     nameRef.current.value = "";
   };
   const verifyEmail = async (e) => {
