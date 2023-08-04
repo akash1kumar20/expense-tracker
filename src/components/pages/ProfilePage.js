@@ -1,9 +1,13 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef , useState} from "react";
 import "./ProfilePage.css";
 import { useNavigate } from "react-router-dom";
 import imgToUse from "./../../images/pngtree-cartoon-man-avatar-vector-ilustration-png-image_6111064.png";
+import axios from "axios";
 import AuthContext from "../../data_room/auth-context";
 const ProfilePage = () => {
+  const [showUpdatedData, setShowUpdatedData] = useState([]);
+  const urlRef = useRef();
+  const nameRef = useRef();
   const autCtx = useContext(AuthContext);
   const isLogIn = autCtx.isLoggedIn;
   const navigate = useNavigate();
@@ -13,40 +17,120 @@ const ProfilePage = () => {
       navigate("/login");
     }
   }, []);
+    const userEmail = localStorage.getItem("userEmail");
+    let changeEmail;
+    if (userEmail === null) {
+      changeEmail = 0;
+    } else {
+      changeEmail = userEmail.replace("@", "").replace(".", "");
+    }
   const openPasswordForm = (event) => {
     event.preventDefault();
     navigate("/changePassword");
   };
   const logOut = () => {
     autCtx.logOut();
-    navigate("/login");
+    navigate("/expense");
   };
-  const userEmail = localStorage.getItem("userEmail");
+  const updateProfile = async (event) => {
+    event.preventDefault();
+    const urlValue = urlRef.current.value;
+    const nameValue = nameRef.current.value;
+    const token = localStorage.getItem("token");
+    try {
+      let res = await axios.post(
+        "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyBO9Xsnbl9K9s08ibLhXEx-rOOcuCk1bF4",
+        {
+          idToken: token,
+          displayName: nameValue,
+          photoUrl: urlValue,
+          returnSecureToken: false,
+        }
+      );
+      let updateData = res.data
+      try{
+        let data = await axios.post(`https://expense-tracker-887e6-default-rtdb.firebaseio.com/updatedData${changeEmail}.json`, updateData)
+        console.log(data);
+        alert('Success!!')
+         navigate("/expense");
+      }catch(err){
+        console.log(err);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    urlRef.current.value = "";
+    nameRef.current.value = "";
+  };
+useEffect(() => {
+  const fetchData = async () => {
+    try{
+      let res = await  axios.get(`https://expense-tracker-887e6-default-rtdb.firebaseio.com/updatedData${changeEmail}.json`)
+      let obj = Object.values(res.data);
+      setShowUpdatedData(obj);
+    }catch(err){
+      console.log(err);
+    }
+  }
+  fetchData();
+},[])
+
 
   return (
     <div className="container mt-2 profile">
       <h1>User Profie</h1>
       <div className="row mt-3 row1">
-        <div className="col-md-4">
-          <p>
-            <img src={imgToUse} width="200px" height="200px" />
-          </p>
-          <p className="ms-4">User: {userEmail}</p>
-          <p className="text-danger">Please Complete Your Profile</p>
+        {showUpdatedData.length > 0  &&  showUpdatedData.map((data) => (
+        <div className="col-md-4" key={data.localId}>
+            <p>
+              <img src={imgToUse} width="200px" height="200px" />
+            </p>
+          <p className="ms-4">Id: {userEmail}</p>
+          <p className="ms-4">User: {data.displayName}</p>
+          <p className="ms-4 updated ps-2 pe-2">Profile Updated</p>
 
-          <p>
-            <input type="file" name="fileUpload" />
-            <input type="submit" value="Change Profile Photo" />
-          </p>
           <p>
             <button
               className="btn btn-info btn-md ms-4"
-              onClick={openPasswordForm}
-            >
+              onClick={openPasswordForm}>
               Change Password
             </button>
           </p>
         </div>
+         ))} 
+         {!showUpdatedData.length> 0 && <div className="col-md-4" >
+            <p>
+              <img src={imgToUse} width="200px" height="200px" />
+            </p>
+          <p className="ms-4">User: {userEmail}</p>
+         <p className="danger ps-2 pe-2 ms-2">Please Complete Your Profile</p>
+          <form onSubmit={updateProfile}>
+            <p>
+                <input
+                  type="text"
+                  placeholder="Enter Your Full Name"
+                  required
+                  ref={nameRef}
+                />
+              <input
+                type="text"
+                placeholder="Please Paste Image URL"
+                required
+                ref={urlRef}
+              /> 
+               <input type="submit" value="Update Profile" /> 
+            </p>
+          </form>
+
+          <p>
+            <button
+              className="btn btn-info btn-md ms-4"
+              onClick={openPasswordForm}>
+              Change Password
+            </button>
+          </p>
+        </div>
+        }
 
         <div className="col-md-8">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dolorem
@@ -68,7 +152,7 @@ const ProfilePage = () => {
           aspernatur laborum recusandae dicta distinctio numquam fuga. Lorem
           ipsum dolor sit amet consectetur adipisicing elit. Aperiam magnam
           impedit quisquam aut velit. Ullam eveniet voluptates neque sunt culpa
-          repellat.
+          repellat. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo voluptates ex omnis et deleniti quod at qui inventore aspernatur est! Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis laborum hic, corrupti maiores omnis harum ipsum voluptate cum eos placeat quod laboriosam officiis amet exercitationem tenetur maxime accusamus sint pariatur! 
           <div className="row justify-content-center">
             <div className="col-4 mt-3">
               <button className="btn btn-danger btn-lg" onClick={logOut}>

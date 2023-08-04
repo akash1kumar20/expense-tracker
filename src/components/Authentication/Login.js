@@ -72,7 +72,7 @@ const Login = () => {
     }
   };
   return (
-    <div className="container mainBox">
+    <div className="container mainBox mt-2">
       <div className="row mb-3 headingStyle">
         <h2>{isLogin ? "Login" : "Signup"}</h2>
       </div>
