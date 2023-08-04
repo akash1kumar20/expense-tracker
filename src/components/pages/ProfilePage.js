@@ -111,15 +111,6 @@ const ProfilePage = () => {
               <p className="ms-4">Id: {data.email}</p>
               <p className="ms-4">User: {data.displayName}</p>
               <p className="ms-4 updated ps-2 pe-2">Profile Updated</p>
-
-              <p>
-                <button
-                  className="btn btn-info btn-md ms-4"
-                  onClick={openPasswordForm}
-                >
-                  Change Password
-                </button>
-              </p>
             </div>
           ))}
         {!showUpdatedData.length > 0 && (
@@ -145,7 +136,6 @@ const ProfilePage = () => {
                   required
                   ref={urlRef}
                 />
-
                 <input
                   type="button"
                   className="bg-secondary text-white"
@@ -162,15 +152,6 @@ const ProfilePage = () => {
                 />
               </p>
             </form>
-
-            <p>
-              <button
-                className="btn btn-info btn-md ms-4"
-                onClick={openPasswordForm}
-              >
-                Change Password
-              </button>
-            </p>
           </div>
         )}
 
@@ -201,6 +182,14 @@ const ProfilePage = () => {
           placeat quod laboriosam officiis amet exercitationem tenetur maxime
           accusamus sint pariatur!
           <div className="row justify-content-center">
+            <div className="col-5 mt-3">
+              <button
+                className="btn btn-info btn-md ms-4"
+                onClick={openPasswordForm}
+              >
+                Change Password
+              </button>
+            </div>
             <div className="col-4 mt-3">
               <button className="btn btn-danger btn-lg" onClick={logOut}>
                 Logout

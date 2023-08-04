@@ -28,7 +28,7 @@ const ExpenseDetails = () => {
     };
 
     fetchData();
-  }, []);
+  });
   let total = 0;
   if (expenseData.length > 0) {
     return (

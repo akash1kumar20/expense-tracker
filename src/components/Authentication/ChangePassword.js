@@ -21,14 +21,14 @@ const ChangePassword = () => {
       );
       console.log(res);
       alert("Password Change Successfully!");
-      navigate("/user");
+      navigate("/profile");
     } catch (err) {
       console.log(err);
     }
   };
   const cancelChange = (event) => {
     event.preventDefault();
-    navigate("/user");
+    navigate("/profile");
   };
   return (
     <div className="container mt-5">
