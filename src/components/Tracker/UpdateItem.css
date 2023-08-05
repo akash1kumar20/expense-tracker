@@ -1,0 +1,11 @@
+.headerRow {
+  border-bottom: 2px solid white;
+  font-weight: bolder;
+  color: rgb(255, 255, 255);
+  /* border-right: 2px solid white;
+  border-top: 2px solid white; */
+  margin-top: 10%;
+}
+.valueRow {
+  text-align: center;
+}

@@ -3,25 +3,29 @@ import "./ExpenseDetails.css";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 const ExpenseDetails = () => {
+  const navigate = useNavigate();
   const [expenseData, setExpenseData] = useState([]);
-
+  const emailValue = localStorage.getItem("userEmail");
+  let changeEmail;
+  if (emailValue === null) {
+    changeEmail = 0;
+  } else {
+    changeEmail = emailValue.replace("@", "").replace(".", "");
+  }
   useEffect(() => {
-    const emailValue = localStorage.getItem("userEmail");
-    let changeEmail;
-    if (emailValue === null) {
-      changeEmail = 0;
-    } else {
-      changeEmail = emailValue.replace("@", "").replace(".", "");
-    }
     const fetchData = async () => {
       try {
         let res = await axios.get(
           ` https://expense-tracker-887e6-default-rtdb.firebaseio.com/expense${changeEmail}.json`
         );
-        let data = Object.values(res.data);
-        setExpenseData(data);
-        console.log(res);
+        const fetchData = [];
+        for (let key in res.data) {
+          fetchData.push({ ...res.data[key], id: key });
+          //because key is important to delete and edit element
+        }
+        setExpenseData(fetchData);
       } catch (err) {
         console.log(err);
       }
@@ -29,6 +33,21 @@ const ExpenseDetails = () => {
 
     fetchData();
   });
+  const deleteItems = async (id) => {
+    try {
+      let res = await axios.delete(
+        `https://expense-tracker-887e6-default-rtdb.firebaseio.com/expense${changeEmail}/${id}.json`
+      );
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const updateItems = (expense) => {
+    console.log(expense.id);
+    localStorage.setItem("expense", JSON.stringify(expense));
+    navigate("/updateExpense");
+  };
   let total = 0;
   if (expenseData.length > 0) {
     return (
@@ -75,8 +94,16 @@ const ExpenseDetails = () => {
             </div>
             <div className="col-1 ">
               <h5>
-                <FontAwesomeIcon icon={faTrash} className="trash me-3 mt-2" />
-                <FontAwesomeIcon icon={faPenToSquare} className="pen mt-2" />
+                <FontAwesomeIcon
+                  icon={faTrash}
+                  className="trash me-3 mt-2"
+                  onClick={() => deleteItems(expense.id)}
+                />
+                <FontAwesomeIcon
+                  icon={faPenToSquare}
+                  className="pen mt-2"
+                  onClick={() => updateItems(expense)}
+                />
               </h5>
             </div>
           </div>

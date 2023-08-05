@@ -9,7 +9,6 @@ const ExpenseForm = () => {
       discritpion: event.target.discription.value,
       category: event.target.category.value,
       payment: event.target.payment.value,
-      id: Math.random(),
     };
     let emailValue = localStorage.getItem("userEmail");
     let changeEmail;
