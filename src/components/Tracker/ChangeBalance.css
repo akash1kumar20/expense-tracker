@@ -4,3 +4,14 @@
   padding-top: 13px;
   padding-bottom: 13px;
 }
+.check {
+  text-align: left;
+  background-color: green;
+  color: white;
+  border: 1px solid black;
+  font-weight: bolder;
+  font-size: x-large;
+}
+.amountValue {
+  text-align: center;
+}

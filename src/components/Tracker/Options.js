@@ -24,7 +24,19 @@ const Options = () => {
           Records
         </h2>
       </div>
-      {showRecords && <ShowRecords />}
+      {showRecords && (
+        <div className="row justify-content-center">
+          <div className="changeRecordBox ">
+            <ShowRecords />
+            <p
+              className="cancel mt-4 me-4"
+              onClick={() => setShowRecords(false)}
+            >
+              Cancel
+            </p>
+          </div>
+        </div>
+      )}
       {changeBalance && (
         <div className="row justify-content-center">
           <div className="changeBalanceBox ">

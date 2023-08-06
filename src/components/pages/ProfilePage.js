@@ -17,7 +17,7 @@ const ProfilePage = () => {
       alert("Please Login First!");
       navigate("/login");
     }
-  }, []);
+  });
   const userEmail = localStorage.getItem("userEmail");
   let changeEmail;
   if (userEmail === null) {
@@ -143,7 +143,7 @@ const ProfilePage = () => {
                   onClick={verifyEmail}
                   required
                 />
-                <p>{showMessage}</p>
+                <span>{showMessage}</span>
 
                 <input
                   type="submit"

@@ -44,7 +44,6 @@ const ExpenseDetails = () => {
     }
   };
   const updateItems = (expense) => {
-    console.log(expense.id);
     localStorage.setItem("expense", JSON.stringify(expense));
     navigate("/updateExpense");
   };

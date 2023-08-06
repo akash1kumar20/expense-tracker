@@ -13,7 +13,7 @@ const ExpensePage = () => {
       alert("Please Login First!");
       navigate("/login");
     }
-  }, []);
+  });
 
   return (
     <>

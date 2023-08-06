@@ -9,7 +9,7 @@
   border: 3px solid white;
 }
 .yellow {
-  background-color: rgb(255, 165, 0);
+  background-color: rgb(187, 123, 6);
   color: white;
   border: 3px solid white;
 }
@@ -29,4 +29,16 @@
   color: rgb(15, 49, 129);
   text-align: center;
   text-decoration: underline;
+}
+.currentlySelected {
+  background-color: white;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  text-decoration: underline;
+}
+.paymentHeading {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  border-color: rgba(255, 255, 255, 0);
 }
