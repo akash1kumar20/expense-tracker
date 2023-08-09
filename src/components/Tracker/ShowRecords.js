@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import './ShowRecords.css';
+import "./ShowRecords.css";
 const ShowRecords = () => {
   const [dataRecord, setDataRecord] = useState([]);
   useEffect(() => {
@@ -32,15 +32,15 @@ const ShowRecords = () => {
       {dataRecord
         .filter((expense) => expense.payment === payment)
         .map((expense, i) => (
-          <div className="row showBox" key={i}> 
-          <div className="col-lg-6">
-            <h3>{expense.category}</h3>
-            <p>{expense.discritpion}</p>
-          </div>
-          <div className="col-lg-6">
-            <h3>₹{expense.amount}</h3>
-            <p>{expense.payment}</p>
-          </div>
+          <div className="row showBox" key={i}>
+            <div className="col-lg-6">
+              <h3>{expense.category}</h3>
+              <p>{expense.discritpion}</p>
+            </div>
+            <div className="col-lg-6">
+              <h3>₹{expense.amount}</h3>
+              <p>{expense.payment}</p>
+            </div>
           </div>
         ))}
     </div>

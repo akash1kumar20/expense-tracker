@@ -1,17 +1,19 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./ProfilePage.css";
 import { useNavigate } from "react-router-dom";
 import imgToUse from "./../../images/pngtree-cartoon-man-avatar-vector-ilustration-png-image_6111064.png";
 import axios from "axios";
-import AuthContext from "../../data_room/auth-context";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../redux/auth";
 const ProfilePage = () => {
   const [showUpdatedData, setShowUpdatedData] = useState([]);
   const [showMessage, setShowMessage] = useState("");
   const nameRef = useRef();
   const urlRef = useRef();
-  const autCtx = useContext(AuthContext);
-  const isLogIn = autCtx.isLoggedIn;
+  const isLogIn = localStorage.getItem("token");
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   useEffect(() => {
     if (!isLogIn) {
       alert("Please Login First!");
@@ -30,7 +32,7 @@ const ProfilePage = () => {
     navigate("/changePassword");
   };
   const logOut = () => {
-    autCtx.logOut();
+    dispatch(authActions.logout());
     navigate("/login");
   };
   const updateProfile = async (event) => {

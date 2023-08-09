@@ -1,18 +1,15 @@
-import React, { useContext, useState } from "react";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./MainNavigation.css";
-import AuthContext from "../../data_room/auth-context";
-import { ThemeChanger } from "../../App";
-import ReactSwitch from "react-switch";
+import { authActions } from "../../redux/auth";
 const MainNavigation = () => {
   const navigate = useNavigate();
-  const autCtx = useContext(AuthContext);
-  const themeCtx = useContext(ThemeChanger);
-  const toggleTheme = () => {};
-  const isLoggedIn = autCtx.isLoggedIn;
+  const dispatch = useDispatch();
+  const isLoggedIn = localStorage.getItem("token");
+  console.log(isLoggedIn);
   const logOutHandler = () => {
-    autCtx.logOut();
+    dispatch(authActions.logout());
     navigate("/login");
   };
   return (
@@ -43,7 +40,7 @@ const MainNavigation = () => {
         </ul>
         {!isLoggedIn ? (
           <ul className="navbar-nav">
-            <li className="nav-item ms-md-5 me-md-2">
+            <li className="nav-item ms-md-5 me-md-5">
               <NavLink to="login" className="NavLink">
                 LOGIN
               </NavLink>
@@ -51,20 +48,11 @@ const MainNavigation = () => {
           </ul>
         ) : (
           <ul className="navbar-nav">
-            <li className="nav-item ms-md-5 me-md-2" onClick={logOutHandler}>
+            <li className="nav-item ms-md-5 me-md-5" onClick={logOutHandler}>
               LOGOUT
             </li>
           </ul>
         )}
-
-        <ul className="navbar-nav">
-          <li className="nav-item mt-1 me-md-4">
-            <ReactSwitch
-              onChange={toggleTheme}
-              checked={themeCtx.theme === "dark"}
-            />
-          </li>
-        </ul>
       </div>
     </nav>
   );

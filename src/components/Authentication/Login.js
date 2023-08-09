@@ -1,16 +1,19 @@
-import React, { useState, useRef, useContext } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useRef } from "react";
 import "./Login.css";
 import axios from "axios";
-import AuthContext from "../../data_room/auth-context";
 import { useNavigate } from "react-router-dom";
+import { authActions } from "../../redux/auth";
 const Login = () => {
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(true);
+  const autCtx = useSelector((state) => state.auth.isLoggedIn);
+  const [isLogin, setIsLogin] = useState(autCtx);
   //managing state for login and signup, also to display two form things in a single forms.
   const switchThings = () => {
     setIsLogin((prevState) => !prevState);
   };
-  const autCtx = useContext(AuthContext);
+
+  const dispatch = useDispatch();
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmpasswordRef = useRef();
@@ -51,7 +54,7 @@ const Login = () => {
         retunrSecureToken: true,
       });
 
-      autCtx.logIn(res.data.idToken);
+      dispatch(authActions.login(res.data));
 
       {
         isLogin ? alert(`Welcome Back`) : alert(`Welcome`);

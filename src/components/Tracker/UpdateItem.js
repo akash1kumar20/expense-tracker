@@ -1,12 +1,10 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./UpdateItem.css";
 import { useNavigate } from "react-router-dom";
-import AuthContext from "../../data_room/auth-context";
 import axios from "axios";
 const UpdateItem = () => {
   const navigate = useNavigate();
-  const autCtx = useContext(AuthContext);
-  const isLogIn = autCtx.isLoggedIn;
+  const isLogIn = localStorage.getItem("token");
   useEffect(() => {
     if (!isLogIn) {
       alert("Please Login First!");

@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Options from "./Options";
 import axios from "axios";
-import { type } from "@testing-library/user-event/dist/type";
 const Payment = () => {
   const [showOptions, setShowOptions] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState("");
