@@ -70,3 +70,8 @@ input:checked + .slider:before {
   padding: 5px;
   zoom: 110%;
 }
+.premium {
+  border: 2px solid white;
+  font-weight: bolder;
+  color: skyblue;
+}

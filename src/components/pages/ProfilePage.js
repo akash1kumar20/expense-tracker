@@ -118,9 +118,7 @@ const ProfilePage = () => {
         );
         let obj = Object.values(res.data);
         setShowUpdatedData(obj);
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     };
     fetchData();
   }, []);

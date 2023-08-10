@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./MainNavigation.css";
@@ -6,6 +6,9 @@ import { authActions } from "../../redux/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const MainNavigation = () => {
+  const totalAmount = useSelector((state) => state.expense.totalAmount);
+  const premimumShow = totalAmount >= 10000;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLoggedIn = localStorage.getItem("token");
@@ -41,6 +44,15 @@ const MainNavigation = () => {
             </li>
           </ul>
 
+          {premimumShow && (
+            <ul className="navbar-nav">
+              <li className="nav-item ms-md-5 me-md-2">
+                <li className="nav-item ms-md-5 me-md-5 premium p-2">
+                  PRIME MEMBER
+                </li>
+              </li>
+            </ul>
+          )}
           <ul className="navbar-nav">
             <li className="nav-item ms-md-5 me-md-2">
               <NavLink to="profile" className="NavLink">

@@ -4,7 +4,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch, useSelector } from "react-redux";
+import { expenseAction } from "../../redux/expense";
 const UpdateItem = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLogIn = localStorage.getItem("token");
   useEffect(() => {

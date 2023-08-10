@@ -3,7 +3,10 @@ import "./ExpenseForm.css";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { expenseAction } from "../../redux/expense";
 const ExpenseForm = () => {
+  const dispatch = useDispatch();
   const expenseDetails = async (event) => {
     event.preventDefault();
     const expense = {
@@ -26,6 +29,7 @@ const ExpenseForm = () => {
         expense
       );
       console.log(res);
+      dispatch(expenseAction.addExpense(expense));
       toast.info("Expense Added", {
         position: "top-right",
         theme: "dark",

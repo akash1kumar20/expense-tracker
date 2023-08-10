@@ -6,8 +6,11 @@ import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { expenseAction } from "../../redux/expense";
 const ExpenseDetails = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [expenseData, setExpenseData] = useState([]);
   const emailValue = localStorage.getItem("email");
   let changeEmail;
@@ -27,6 +30,7 @@ const ExpenseDetails = () => {
           fetchData.push({ ...res.data[key], id: key });
           //because key is important to delete and edit element
         }
+        dispatch(expenseAction.setExpense(fetchData));
         setExpenseData(fetchData);
       } catch (err) {
         console.log(err);
@@ -35,10 +39,10 @@ const ExpenseDetails = () => {
 
     fetchData();
   });
-  const deleteItems = async (id) => {
+  const deleteItems = async (expense) => {
     try {
       let res = await axios.delete(
-        `https://expense-tracker-887e6-default-rtdb.firebaseio.com/expense${changeEmail}/${id}.json`
+        `https://expense-tracker-887e6-default-rtdb.firebaseio.com/expense${changeEmail}/${expense.id}.json`
       );
       console.log(res);
       toast.warning("Expense Deleted!", {
@@ -110,7 +114,7 @@ const ExpenseDetails = () => {
                   <FontAwesomeIcon
                     icon={faTrash}
                     className="trash me-3 mt-2"
-                    onClick={() => deleteItems(expense.id)}
+                    onClick={() => deleteItems(expense)}
                   />
                   <FontAwesomeIcon
                     icon={faPenToSquare}
