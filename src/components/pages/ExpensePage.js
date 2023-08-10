@@ -17,7 +17,7 @@ const ExpensePage = () => {
       });
       setTimeout(() => {
         navigate("/login");
-      }, 1500);
+      }, 1000);
     }
   });
 

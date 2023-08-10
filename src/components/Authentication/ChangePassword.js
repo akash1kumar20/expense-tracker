@@ -39,7 +39,7 @@ const ChangePassword = () => {
   return (
     <>
       <ToastContainer />
-      <div className="container mt-5">
+      <div className="container updateBox mt-5">
         <form onSubmit={changePasswordHandler}>
           <div className="col-5">
             <label htmlFor="changePassword">

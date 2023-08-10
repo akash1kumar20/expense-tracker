@@ -6,9 +6,12 @@ import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { expenseAction } from "../../redux/expense";
+import { CSVLink } from "react-csv";
 const ExpenseDetails = () => {
+  const totalAmount = useSelector((state) => state.expense.totalAmount);
+  const premimumShow = totalAmount >= 10000;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [expenseData, setExpenseData] = useState([]);
@@ -62,6 +65,25 @@ const ExpenseDetails = () => {
   const updateItems = (expense) => {
     localStorage.setItem("expense", JSON.stringify(expense));
     navigate("/updateExpense");
+  };
+  const headers = [
+    {
+      label: "Amount",
+      key: "amount",
+    },
+    {
+      label: "Discription",
+      key: "discritpion",
+    },
+    { label: "Category", key: "category" },
+    { label: "Payment", key: "payment" },
+  ];
+  //headers is required to give heading to our excel file
+  //key is used here to access the things inside object
+  const csvLink = {
+    filename: "Expense.csv",
+    headers: headers,
+    data: expenseData,
   };
   let total = 0;
   if (expenseData.length > 0) {
@@ -126,6 +148,15 @@ const ExpenseDetails = () => {
             </div>
           ))}
         </div>
+        {premimumShow && (
+          <div className="row justify-content-center mt-3">
+            <p>
+              <CSVLink {...csvLink} className="downloadFile p-2">
+                Download File
+              </CSVLink>
+            </p>
+          </div>
+        )}
       </>
     );
   } else {

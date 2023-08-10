@@ -5,7 +5,6 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
-import { expenseAction } from "../../redux/expense";
 const UpdateItem = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -71,7 +70,7 @@ const UpdateItem = () => {
   return (
     <>
       <ToastContainer />
-      <div className="container mt-5">
+      <div className="container updateBox">
         <div className="row headerRow ">
           <div className="col-3 ">
             <h3>Amount</h3>

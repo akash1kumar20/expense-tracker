@@ -1,3 +1,16 @@
+:root {
+  --body_background: white;
+  --body_color: black;
+  /* by this approch we can declare the variable */
+}
+
+[theme="dark"] {
+  --body_background: black;
+  --body_color: white;
+}
+* {
+  transition: all 0.2s ease-in-out;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -5,8 +18,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: black;
-  color: white;
   text-align: center;
 }
 

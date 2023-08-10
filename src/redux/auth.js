@@ -18,7 +18,8 @@ const authSlice = createSlice({
     logout(state) {
       state.token = "";
       state.email = "";
-      localStorage.clear();
+      localStorage.removeItem("token");
+      localStorage.removeItem("email");
     },
   },
 });

@@ -26,7 +26,7 @@ const ForgotPassword = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="container updateBox">
         <div className="row mt-5 justify-content-center">
           <img src={imgToUse} className="randomImage" />
         </div>

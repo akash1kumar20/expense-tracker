@@ -8,6 +8,7 @@ import NotFoundPage from "./components/pages/NotFoundPage";
 import ChangePassword from "./components/Authentication/ChangePassword";
 import ForgotPassword from "./components/Authentication/ForgotPassword";
 import UpdateItem from "./components/Tracker/UpdateItem";
+import "./App.css";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,7 +27,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <div className="App">
+      <RouterProvider router={router} />
+    </div>
+  );
 }
 
 export default App;

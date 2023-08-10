@@ -89,7 +89,7 @@ const Login = () => {
     navigate("/forgotPassword");
   };
   return (
-    <>
+    <div className="updateBox">
       <div className="container mainBox mt-2">
         <div className="row mb-3 headingStyle">
           <h2>{isLogin ? "Login" : "Signup"}</h2>
@@ -187,7 +187,7 @@ const Login = () => {
         </form>
       </div>
       <ToastContainer />
-    </>
+    </div>
   );
 };
 
