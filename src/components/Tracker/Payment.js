@@ -21,7 +21,7 @@ const Payment = () => {
   };
   useEffect(() => {
     const fetchData = async () => {
-      let emailValue = localStorage.getItem("userEmail");
+      let emailValue = localStorage.getItem("email");
       let changeEmail;
       if (emailValue === null) {
         changeEmail = 0;

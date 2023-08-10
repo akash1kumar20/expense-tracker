@@ -23,47 +23,45 @@ const ForgotPassword = () => {
       console.log(err);
     }
   };
+
   return (
-    <div className="container">
-      <div className="row mt-5 justify-content-center">
-        <img src={imgToUse} className="randomImage" />
-      </div>
-      <div className="row mt-3">
-        <p>Enter the email with which you have registered.</p>
-      </div>
-      <form onSubmit={forgotPasswordHandler}>
-        <div className="row mt-2 justify-content-center">
-          <input
-            type="text"
-            required
-            placeholder="Email"
-            className="forgotPasswordEmail"
-            ref={emailRef}
-          />
+    <>
+      <div className="container">
+        <div className="row mt-5 justify-content-center">
+          <img src={imgToUse} className="randomImage" />
         </div>
-        {!message && (
-          <div className="row mt-1 justify-content-center">
-            <button type="submit" className="forgotPasswordEmailButton">
-              Send Link
-            </button>
+        <div className="row mt-3">
+          <p>Enter the email with which you have registered.</p>
+        </div>
+        <form onSubmit={forgotPasswordHandler}>
+          <div className="row mt-2 justify-content-center">
+            <input
+              type="text"
+              required
+              placeholder="Email"
+              className="forgotPasswordEmail"
+              ref={emailRef}
+            />
           </div>
-        )}
-        {message && <span>{message}</span>}
-      </form>
-      <div className="row mt-1">
-        <p>
-          Already a user?
-          <b
-            className="text-warning"
-            onClick={() => {
-              navigate("/login");
-            }}
-          >
-            Login
-          </b>
-        </p>
+          {!message && (
+            <div className="row mt-1 justify-content-center">
+              <button type="submit" className="forgotPasswordEmailButton">
+                Send Link
+              </button>
+            </div>
+          )}
+          {message && <span>{message}</span>}
+        </form>
+        <div className="row mt-1">
+          <p>
+            Already a user?
+            <b className="text-warning" onClick={() => navigate("/login")}>
+              Login
+            </b>
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

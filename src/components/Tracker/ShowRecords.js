@@ -4,7 +4,7 @@ import "./ShowRecords.css";
 const ShowRecords = () => {
   const [dataRecord, setDataRecord] = useState([]);
   useEffect(() => {
-    const emailValue = localStorage.getItem("userEmail");
+    const emailValue = localStorage.getItem("email");
     let changeEmail;
     if (emailValue === null) {
       changeEmail = 0;

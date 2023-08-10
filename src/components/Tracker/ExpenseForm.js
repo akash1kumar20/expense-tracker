@@ -1,6 +1,8 @@
 import React from "react";
 import "./ExpenseForm.css";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const ExpenseForm = () => {
   const expenseDetails = async (event) => {
     event.preventDefault();
@@ -10,7 +12,7 @@ const ExpenseForm = () => {
       category: event.target.category.value,
       payment: event.target.payment.value,
     };
-    let emailValue = localStorage.getItem("userEmail");
+    let emailValue = localStorage.getItem("email");
     let changeEmail;
     if (emailValue === null) {
       changeEmail = 0;
@@ -24,111 +26,125 @@ const ExpenseForm = () => {
         expense
       );
       console.log(res);
+      toast.info("Expense Added", {
+        position: "top-right",
+        theme: "dark",
+        autoClose: 2000,
+      });
     } catch (err) {
       console.log(err);
     }
   };
 
   return (
-    <div className="container bg-info mt-3">
-      <form onSubmit={expenseDetails}>
-        <div className="row">
-          <div className="col-lg-2 mt-3">
-            <label htmlFor="amount">
-              <h3>Amount:</h3>
-            </label>
-            <br />
-            <input
-              type="number"
-              id="amount"
-              name="amount"
-              required
-              min="0"
-              placeholder="Amount in ₹ "
-            ></input>
-          </div>
-          <div className="col-lg-4 mt-3">
-            <label htmlFor="discription">
-              <h3>Discription:</h3>
-            </label>
-            <br />
-            <input
-              type="text"
-              id="discription"
-              name="discription"
-              required
-              placeholder="Where you spend your money?"
-            ></input>
-          </div>
-          <div className="col-lg-2 mt-3">
-            <label htmlFor="discription">
-              <h3>Category:</h3>
-            </label>
-            <br />
-            <select id="category" required>
-              <option
-                value=""
-                id="category"
-                name="category"
-                defaultValue
-                hidden
+    <>
+      <ToastContainer />
+      <div className="container bg-info mt-3">
+        <form onSubmit={expenseDetails}>
+          <div className="row">
+            <div className="col-lg-2 mt-3">
+              <label htmlFor="amount">
+                <h3>Amount:</h3>
+              </label>
+              <br />
+              <input
+                type="number"
+                id="amount"
+                name="amount"
+                required
+                min="0"
+                placeholder="Amount in ₹ "
+              ></input>
+            </div>
+            <div className="col-lg-4 mt-3">
+              <label htmlFor="discription">
+                <h3>Discription:</h3>
+              </label>
+              <br />
+              <input
+                type="text"
+                id="discription"
+                name="discription"
+                required
+                placeholder="Where you spend your money?"
+              ></input>
+            </div>
+            <div className="col-lg-2 mt-3">
+              <label htmlFor="discription">
+                <h3>Category:</h3>
+              </label>
+              <br />
+              <select id="category" required>
+                <option
+                  value=""
+                  id="category"
+                  name="category"
+                  defaultValue
+                  hidden
+                >
+                  Choose One
+                </option>
+                <option value="Food" id="category" name="category">
+                  Food
+                </option>
+                <option value="Shopping" id="category" name="category">
+                  Shopping
+                </option>
+                <option value="Housing" id="category" name="category">
+                  Housing
+                </option>
+                <option value="Transportaion" id="category" name="category">
+                  Transportaion
+                </option>
+                <option value="Vehicle" id="category" name="category">
+                  Vehicle
+                </option>
+                <option value="Investments" id="category" name="category">
+                  Investments
+                </option>
+                <option value="Entertainment" id="category" name="category">
+                  Entertainment
+                </option>
+              </select>
+            </div>
+            <div className="col-lg-2 mt-3">
+              <label htmlFor="discription">
+                <h3>Pay Using:</h3>
+              </label>
+              <br />
+              <select id="payment" required>
+                <option
+                  value=""
+                  id="payment"
+                  name="payment"
+                  defaultValue
+                  hidden
+                >
+                  Choose One
+                </option>
+                <option value="Cash" id="payment" name="payment">
+                  Cash
+                </option>
+                <option value="Bank" id="payment" name="payment">
+                  Bank
+                </option>
+                <option value="PayTm" id="payment" name="payment">
+                  PayTm
+                </option>
+              </select>
+            </div>
+            <div className="col-lg-2 mt-5 ">
+              <button
+                className="btn btn-dark btn-md text-white expenseBtn"
+                type="submit"
               >
-                Choose One
-              </option>
-              <option value="Food" id="category" name="category">
-                Food
-              </option>
-              <option value="Shopping" id="category" name="category">
-                Shopping
-              </option>
-              <option value="Housing" id="category" name="category">
-                Housing
-              </option>
-              <option value="Transportaion" id="category" name="category">
-                Transportaion
-              </option>
-              <option value="Vehicle" id="category" name="category">
-                Vehicle
-              </option>
-              <option value="Investments" id="category" name="category">
-                Investments
-              </option>
-              <option value="Entertainment" id="category" name="category">
-                Entertainment
-              </option>
-            </select>
+                Add Expense
+              </button>
+            </div>
           </div>
-          <div className="col-lg-2 mt-3">
-            <label htmlFor="discription">
-              <h3>Pay Using:</h3>
-            </label>
-            <br />
-            <select id="payment" required>
-              <option value="" id="payment" name="payment" defaultValue hidden>
-                Choose One
-              </option>
-              <option value="Cash" id="payment" name="payment">
-                Cash
-              </option>
-              <option value="Bank" id="payment" name="payment">
-                Bank
-              </option>
-              <option value="PayTm" id="payment" name="payment">
-                PayTm
-              </option>
-            </select>
-          </div>
-          <div className="col-lg-2 mt-5 ">
-            <button
-              className="btn btn-dark btn-md text-white expenseBtn"
-              type="submit"
-            >
-              Add Expense
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
+    </>
   );
 };
 

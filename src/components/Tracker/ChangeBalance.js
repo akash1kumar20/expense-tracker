@@ -10,7 +10,7 @@ const ChangeBalance = () => {
     event.preventDefault();
     const paymentMode = localStorage.getItem("paymentMode");
     const paymentModeChange = paymentMode.replace('"', "").replace('"', "");
-    let emailValue = localStorage.getItem("userEmail");
+    let emailValue = localStorage.getItem("email");
     let changeEmail;
     if (emailValue === null) {
       changeEmail = 0;

@@ -4,6 +4,8 @@ import "./Login.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { authActions } from "../../redux/auth";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
   const navigate = useNavigate();
   const autCtx = useSelector((state) => state.auth.isLoggedIn);
@@ -31,11 +33,11 @@ const Login = () => {
       userEmail = emailRef.current.value;
       userPassword = passwordRef.current.value;
       confirmpassword = confirmpasswordRef.current.value;
+
       if (userPassword !== confirmpassword) {
-        return alert("Password Not Match, please enter same password");
+        return toast("Password Not Match, please enter same password");
       }
     }
-    localStorage.setItem("userEmail", userEmail);
     setIsLoading(true);
     let url;
     if (isLogin) {
@@ -53,15 +55,28 @@ const Login = () => {
         password: userPassword,
         retunrSecureToken: true,
       });
-
       dispatch(authActions.login(res.data));
-
       {
-        isLogin ? alert(`Welcome Back`) : alert(`Welcome`);
+        isLogin &&
+          toast.success("Welcome Back", {
+            position: "top-center",
+            theme: "colored",
+            autoClose: 2000,
+          });
       }
       {
-        isLogin ? navigate("/") : navigate("/profile");
+        !isLogin &&
+          toast.success("Welcome", {
+            position: "top-center",
+            theme: "colored",
+            autoClose: 2000,
+          });
       }
+      setTimeout(() => {
+        {
+          isLogin ? navigate("/") : navigate("/profile");
+        }
+      }, 2500);
       setIsLoading(false);
     } catch (err) {
       console.log(err);
@@ -74,102 +89,105 @@ const Login = () => {
     navigate("/forgotPassword");
   };
   return (
-    <div className="container mainBox mt-2">
-      <div className="row mb-3 headingStyle">
-        <h2>{isLogin ? "Login" : "Signup"}</h2>
-      </div>
-      <form onSubmit={submitHandler}>
-        <div className="row">
-          <label htmlFor="email">
-            <h5>Email:</h5>
-          </label>
+    <>
+      <div className="container mainBox mt-2">
+        <div className="row mb-3 headingStyle">
+          <h2>{isLogin ? "Login" : "Signup"}</h2>
         </div>
-        <div className="row mt-2 mb-2 justify-content-center">
-          <div className="col-10">
-            <input
-              type="email"
-              required
-              id="email"
-              ref={emailRef}
-              placeholder="Your Email"
-            ></input>
-          </div>
-        </div>
-        <div className="row">
-          <label htmlFor="password">
-            <h5>Password:</h5>
-          </label>
-        </div>
-        <div className="row mt-2 mb-2 justify-content-center">
-          <div className="col-10">
-            <input
-              type="password"
-              required
-              id="password"
-              ref={passwordRef}
-              minLength={6}
-              placeholder="Enter Password"
-            ></input>
-          </div>
-          {isLogin && (
-            <span className="mt-2 text-warning" onClick={forgotPassword}>
-              Forgot Password?
-            </span>
-          )}
-        </div>
-        {!isLogin && (
+        <form onSubmit={submitHandler}>
           <div className="row">
-            <label htmlFor="confirmpassword">
-              <h5>Confirm Password:</h5>
+            <label htmlFor="email">
+              <h5>Email:</h5>
             </label>
           </div>
-        )}
-        {!isLogin && (
+          <div className="row mt-2 mb-2 justify-content-center">
+            <div className="col-10">
+              <input
+                type="email"
+                required
+                id="email"
+                ref={emailRef}
+                placeholder="Your Email"
+              ></input>
+            </div>
+          </div>
+          <div className="row">
+            <label htmlFor="password">
+              <h5>Password:</h5>
+            </label>
+          </div>
           <div className="row mt-2 mb-2 justify-content-center">
             <div className="col-10">
               <input
                 type="password"
                 required
-                id="confirmpassword"
-                ref={confirmpasswordRef}
+                id="password"
+                ref={passwordRef}
                 minLength={6}
-                placeholder="Confirm Password"
+                placeholder="Enter Password"
               ></input>
             </div>
-          </div>
-        )}
-
-        <div className="row mt-3  justify-content-center">
-          <div className="col-10">
-            {!isLoading ? (
-              <button className="btn btn-success btn-md">
-                {isLogin ? "Login" : "SignUp"}
-              </button>
-            ) : (
-              <div className="text-center">
-                <div className="spinner-border" role="status">
-                  <span className="sr-only">Loading...</span>
-                </div>
-              </div>
+            {isLogin && (
+              <span className="mt-2 text-warning" onClick={forgotPassword}>
+                Forgot Password?
+              </span>
             )}
           </div>
-        </div>
-        <div className="row">
-          <span>{isLogin ? "New User ?" : "Already have a account ?"}</span>
-        </div>
-        <div className="row mt-1 justify-content-center">
-          <div className="col-10">
-            <button
-              className="btn btn-info btn-md"
-              onClick={switchThings}
-              type="button"
-            >
-              {isLogin ? "Create an account" : "Login into your account"}
-            </button>
+          {!isLogin && (
+            <div className="row">
+              <label htmlFor="confirmpassword">
+                <h5>Confirm Password:</h5>
+              </label>
+            </div>
+          )}
+          {!isLogin && (
+            <div className="row mt-2 mb-2 justify-content-center">
+              <div className="col-10">
+                <input
+                  type="password"
+                  required
+                  id="confirmpassword"
+                  ref={confirmpasswordRef}
+                  minLength={6}
+                  placeholder="Confirm Password"
+                ></input>
+              </div>
+            </div>
+          )}
+
+          <div className="row mt-3  justify-content-center">
+            <div className="col-10">
+              {!isLoading ? (
+                <button className="btn btn-success btn-md">
+                  {isLogin ? "Login" : "SignUp"}
+                </button>
+              ) : (
+                <div className="text-center">
+                  <div className="spinner-border" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      </form>
-    </div>
+          <div className="row">
+            <span>{isLogin ? "New User ?" : "Already have a account ?"}</span>
+          </div>
+          <div className="row mt-1 justify-content-center">
+            <div className="col-10">
+              <button
+                className="btn btn-info btn-md"
+                onClick={switchThings}
+                type="button"
+              >
+                {isLogin ? "Create an account" : "Login into your account"}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <ToastContainer />
+    </>
   );
 };
 
