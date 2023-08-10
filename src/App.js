@@ -1,5 +1,3 @@
-import React, { useState, createContext } from "react";
-import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ExpensePage from "./components/pages/ExpensePage";
 import LoginPage from "./components/pages/LoginPage";
@@ -26,22 +24,9 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-export const ThemeChanger = React.createContext(null);
 
 function App() {
-  const [theme, setTheme] = useState("dark");
-  const toggleTheme = () => {
-    setTheme((curr) => (curr === "light" ? "dark" : "light"));
-    //if current theme is light it will switch it too dark and if it's dark it will switch to light.
-  };
-  return (
-    <ThemeChanger.Provider value={{ theme, toggleTheme }}>
-      <div id={theme} className="container-fluid App">
-        {/* setting id dynamically */}
-        <RouterProvider router={router} />
-      </div>
-    </ThemeChanger.Provider>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

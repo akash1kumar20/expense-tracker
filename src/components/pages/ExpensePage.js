@@ -5,10 +5,10 @@ import Payment from "../Tracker/Payment";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useSelector } from "react-redux";
 const ExpensePage = () => {
   const navigate = useNavigate();
   const isLogIn = localStorage.getItem("token");
-  const url = localStorage.getItem("url");
   useEffect(() => {
     if (!isLogIn) {
       toast.warning("Please Login First!", {
@@ -18,16 +18,6 @@ const ExpensePage = () => {
       });
       setTimeout(() => {
         navigate("/login");
-      }, 1500);
-    }
-    if (!url) {
-      toast.warning("Please Complete Your Profile First!", {
-        position: "top-center",
-        theme: "dark",
-        autoClose: 1000,
-      });
-      setTimeout(() => {
-        navigate("/profile");
       }, 1500);
     }
   });

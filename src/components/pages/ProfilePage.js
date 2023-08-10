@@ -76,8 +76,14 @@ const ProfilePage = () => {
           updateData
         );
         console.log(data);
-        alert("Success!!");
-        navigate("/expense");
+        toast.success("Profile Updated!", {
+          position: "top-center",
+          theme: "light",
+          autoClose: 2000,
+        });
+        setTimeout(() => {
+          navigate("/expense");
+        }, 2500);
       } catch (err) {
         console.log(err);
       }
