@@ -3,23 +3,45 @@ import ExpenseForm from "../Tracker/ExpenseForm";
 import ExpenseDetails from "../Tracker/ExpenseDetails";
 import Payment from "../Tracker/Payment";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const ExpensePage = () => {
   const navigate = useNavigate();
   const isLogIn = localStorage.getItem("token");
-
-  console.log(isLogIn);
+  const url = localStorage.getItem("url");
   useEffect(() => {
     if (!isLogIn) {
-      alert("Please Login First!");
-      navigate("/login");
+      toast.warning("Please Login First!", {
+        position: "top-center",
+        theme: "dark",
+        autoClose: 1000,
+      });
+      setTimeout(() => {
+        navigate("/login");
+      }, 1500);
+    }
+    if (!url) {
+      toast.warning("Please Complete Your Profile First!", {
+        position: "top-center",
+        theme: "dark",
+        autoClose: 1000,
+      });
+      setTimeout(() => {
+        navigate("/profile");
+      }, 1500);
     }
   });
 
   return (
     <>
-      <Payment />
-      <ExpenseForm />
-      <ExpenseDetails />
+      <ToastContainer />
+      {isLogIn && (
+        <>
+          <Payment />
+          <ExpenseForm />
+          <ExpenseDetails />
+        </>
+      )}
     </>
   );
 };
