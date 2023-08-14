@@ -149,9 +149,9 @@ const ExpenseDetails = () => {
           ))}
         </div>
         {premimumShow && (
-          <div className="row justify-content-center mt-3">
+          <div className="row justify-content-center mt-3 expenseBox">
             <p>
-              <CSVLink {...csvLink} className="downloadFile p-2">
+              <CSVLink {...csvLink} className="downloadFile p-2 ">
                 Download File
               </CSVLink>
             </p>

@@ -17,7 +17,6 @@ const MainNavigation = () => {
   }
   const premimumShow = totalAmount >= 10000;
   const bodyTag = document.querySelector("body");
-  console.log(bodyTag);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLoggedIn = localStorage.getItem("token");
@@ -30,6 +29,7 @@ const MainNavigation = () => {
     });
     setTimeout(() => {
       navigate("/login");
+      window.location.reload(true);
     }, 2500);
   };
 
@@ -72,6 +72,15 @@ const MainNavigation = () => {
               </NavLink>
             </li>
           </ul>
+          {premimumShow && isLoggedIn && (
+            <ul className="navbar-nav">
+              <li className="nav-item ms-md-5  " onClick={changeTheme}>
+                {themeChanger === false
+                  ? " APPLY LIGHT THEME"
+                  : " APPLY DARK THEME"}
+              </li>
+            </ul>
+          )}
           {!isLoggedIn ? (
             <ul className="navbar-nav">
               <li className="nav-item ms-md-5 me-md-5">
@@ -84,15 +93,6 @@ const MainNavigation = () => {
             <ul className="navbar-nav">
               <li className="nav-item ms-md-5 me-md-5" onClick={logOutHandler}>
                 LOGOUT
-              </li>
-            </ul>
-          )}
-          {premimumShow && isLoggedIn && (
-            <ul className="navbar-nav">
-              <li className="nav-item ms-md-1 me-md-5 " onClick={changeTheme}>
-                {themeChanger === false
-                  ? " APPLY LIGHT THEME"
-                  : " APPLY DARK THEME"}
               </li>
             </ul>
           )}

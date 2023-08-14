@@ -18,7 +18,6 @@ const expenseSlice = createSlice({
       //   console.log("totalAmount", state.totalAmount);
     },
     addExpense(state, action) {
-      console.log(state.expenses);
       state.expenses.push(action.payload);
       state.totalAmount += Number(action.payload.amount);
       //   console.log("addExpense");

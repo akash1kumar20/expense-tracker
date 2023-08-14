@@ -47,6 +47,7 @@ const ProfilePage = () => {
     });
     setTimeout(() => {
       navigate("/login");
+      window.location.reload(true);
     }, 2500);
   };
   const updateProfile = async (event) => {
@@ -132,13 +133,15 @@ const ProfilePage = () => {
           <div className="row mt-3 row1">
             {showUpdatedData.length > 0 &&
               showUpdatedData.map((data) => (
-                <div className="col-md-4" key={data.localId}>
-                  <p>
-                    <img src={`${data.photoUrl}`} className="profileImage" />
-                  </p>
-                  <p className="ms-4">Id: {data.email}</p>
-                  <p className="ms-4">User: {data.displayName}</p>
-                  <p className="ms-4 updated ps-2 pe-2">Profile Updated</p>
+                <div className="col-md-4 " key={data.localId}>
+                  <div className="profileImageBackground pt-2 pb-1 mb-2">
+                    <p>
+                      <img src={`${data.photoUrl}`} className="profileImage" />
+                    </p>
+                  </div>
+                  <p className="ms-5 ">Id: {data.email}</p>
+                  <p className="ms-5">User: {data.displayName}</p>
+                  <p className="ms-5 updated ps-2 pe-2">Profile Updated</p>
                 </div>
               ))}
             {!showUpdatedData.length > 0 && (
