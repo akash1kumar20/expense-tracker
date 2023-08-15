@@ -28,7 +28,11 @@ const ForgotPassword = () => {
     <>
       <div className="container updateBox">
         <div className="row mt-5 justify-content-center">
-          <img src={imgToUse} className="randomImage bg-primary" />
+          <img
+            src={imgToUse}
+            className="randomImage bg-primary"
+            alt="User Image"
+          />
         </div>
         <div className="row mt-3">
           <p>Enter the email with which you have registered.</p>
