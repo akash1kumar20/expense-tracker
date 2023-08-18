@@ -1,37 +1,23 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import "./ChangeBalance.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { paymentAction } from "../../redux/payment";
 import axios from "axios";
 const ChangeBalance = () => {
   const amountRef = useRef();
-
-  const saveAmountValue = async (event) => {
+  const dipatch = useDispatch();
+  const saveAmountValue = (event) => {
     event.preventDefault();
     const paymentMode = localStorage.getItem("paymentMode");
     const paymentModeChange = paymentMode.replace('"', "").replace('"', "");
-    let emailValue = localStorage.getItem("email");
-    let changeEmail;
-    if (emailValue === null) {
-      changeEmail = 0;
-    } else {
-      changeEmail = emailValue.replace("@", "").replace(".", "");
-    }
-    const balance = {
+    const balanceAdded = {
       balance: amountRef.current.value,
       paymentMode: paymentModeChange,
     };
-
-    try {
-      let res = await axios.post(
-        ` https://expense-tracker-887e6-default-rtdb.firebaseio.com/balance${changeEmail}.json`,
-        balance
-      );
-      console.log(res);
-    } catch (err) {
-      console.log(err);
-    }
-    window.location.reload(true);
+    dipatch(paymentAction.addBalance(balanceAdded));
+    dipatch(paymentAction.mainForm(false));
   };
 
   return (

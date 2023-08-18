@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { expenseAction } from "../../redux/expense";
+import { paymentAction } from "../../redux/payment";
 const ExpenseForm = () => {
   const dispatch = useDispatch();
   const expenseDetails = async (event) => {
@@ -15,6 +16,12 @@ const ExpenseForm = () => {
       category: event.target.category.value,
       payment: event.target.payment.value,
     };
+    dispatch(
+      paymentAction.updateBalance({
+        amount: expense.amount,
+        payment: expense.payment,
+      })
+    );
     let emailValue = localStorage.getItem("email");
     let changeEmail;
     if (emailValue === null) {
@@ -78,7 +85,7 @@ const ExpenseForm = () => {
                 <h3>Category:</h3>
               </label>
               <br />
-              <select id="category" required>
+              <select id="category" required className="mb-2">
                 <option
                   value=""
                   id="category"

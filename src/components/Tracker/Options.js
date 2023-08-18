@@ -4,14 +4,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faListUl } from "@fortawesome/free-solid-svg-icons";
 import ShowRecords from "./ShowRecords";
 import ChangeBalance from "./ChangeBalance";
+import { useSelector, useDispatch } from "react-redux";
+import { paymentAction } from "../../redux/payment";
 const Options = () => {
+  const changeBalance = useSelector((state) => state.payment.paymentForm);
+  const dispatch = useDispatch();
   const [showRecords, setShowRecords] = useState(false);
-  const [changeBalance, setChangeBalance] = useState(false);
   const showRecordsHandler = () => {
     setShowRecords(true);
   };
   const balanceChangeHandler = () => {
-    setChangeBalance(true);
+    dispatch(paymentAction.paymentForm(true));
+  };
+  const recordsHandler = () => {
+    setShowRecords(false);
   };
   return (
     <div className=" row bg-light justify-content-between">
@@ -28,10 +34,7 @@ const Options = () => {
         <div className="row justify-content-center">
           <div className="changeRecordBox ">
             <ShowRecords />
-            <p
-              className="cancel mt-4 me-4"
-              onClick={() => setShowRecords(false)}
-            >
+            <p className="cancel mt-4 me-4" onClick={recordsHandler}>
               Cancel
             </p>
           </div>
@@ -43,7 +46,7 @@ const Options = () => {
             <ChangeBalance />
             <p
               className="cancel mt-4 me-4"
-              onClick={() => setChangeBalance(false)}
+              onClick={() => dispatch(paymentAction.paymentForm(false))}
             >
               Cancel
             </p>

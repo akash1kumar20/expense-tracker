@@ -4,15 +4,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Options from "./Options";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { paymentAction } from "../../redux/payment";
 const Payment = () => {
-  const [showOptions, setShowOptions] = useState(false);
+  const showOptions = useSelector((state) => state.payment.mainForm);
+  const dispatch = useDispatch();
+  const paymentItems = useSelector((state) => state.payment.paymentItems);
   const [selectedPayment, setSelectedPayment] = useState("");
   const [balance, setBalance] = useState([]);
   const displayOption = () => {
-    setShowOptions(true);
+    dispatch(paymentAction.mainForm(true));
   };
   const hidedisplayOption = () => {
-    setShowOptions(false);
+    dispatch(paymentAction.mainForm(false));
   };
   const paymentMode = (event) => {
     event.preventDefault();
@@ -31,7 +35,7 @@ const Payment = () => {
 
       try {
         let res = await axios.get(
-          `https://expense-tracker-887e6-default-rtdb.firebaseio.com/balance${changeEmail}.json`
+          `https://new-project-2c75e-default-rtdb.firebaseio.com/balance${changeEmail}.json`
         );
         const fetchData = [];
         for (let key in res.data) {
@@ -39,11 +43,35 @@ const Payment = () => {
         }
         setBalance(fetchData);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     fetchData();
   });
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log("after", paymentItems);
+      let emailValue = localStorage.getItem("email");
+      let changeEmail;
+      if (emailValue === null) {
+        changeEmail = 0;
+      } else {
+        changeEmail = emailValue.replace("@", "").replace(".", "");
+      }
+      try {
+        let res = await axios.put(
+          ` https://new-project-2c75e-default-rtdb.firebaseio.com/balance${changeEmail}.json`,
+          paymentItems
+        );
+        console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+      dispatch(paymentAction.paymentForm(false));
+      // window.location.reload(true);
+    };
+    fetchData();
+  }, [paymentItems]);
 
   return (
     <div className="container mt-2">
@@ -62,7 +90,7 @@ const Payment = () => {
             {balance
               .filter((balance) => balance.paymentMode === "Cash")
               .map((balance) => (
-                <p key={balance.id}>₹{Number(balance.balance)}</p>
+                <p key={balance.id}>₹ {Number(balance.balance)}</p>
               ))}
           </div>
 
@@ -79,7 +107,7 @@ const Payment = () => {
             {balance
               .filter((balance) => balance.paymentMode === "Bank")
               .map((balance) => (
-                <p key={balance.id}> {Number(balance.balance)}</p>
+                <p key={balance.id}> ₹ {Number(balance.balance)}</p>
               ))}
           </div>
 

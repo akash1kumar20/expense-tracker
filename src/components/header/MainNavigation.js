@@ -9,14 +9,18 @@ import { themeActions } from "../../redux/theme";
 const MainNavigation = () => {
   const totalAmount = useSelector((state) => state.expense.totalAmount);
   const themeChanger = useSelector((state) => state.theme.mode);
-  let theme;
-  if (themeChanger === false) {
+  let theme = "light";
+  if (themeChanger === false || themeChanger === "") {
     theme = "light";
   } else {
     theme = "dark";
   }
-  const premimumShow = totalAmount >= 10000;
   const bodyTag = document.querySelector("body");
+  bodyTag.setAttribute("theme", theme);
+  const premimumShow = totalAmount >= 10000;
+  if (!premimumShow) {
+    localStorage.setItem("light", JSON.stringify(false));
+  }
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLoggedIn = localStorage.getItem("token");
@@ -75,9 +79,8 @@ const MainNavigation = () => {
           {premimumShow && isLoggedIn && (
             <ul className="navbar-nav">
               <li className="nav-item ms-md-5  " onClick={changeTheme}>
-                {themeChanger === false
-                  ? " APPLY LIGHT THEME"
-                  : " APPLY DARK THEME"}
+                {themeChanger && " APPLY LIGHT THEME"}
+                {!themeChanger && " APPLY DARK THEME"}
               </li>
             </ul>
           )}
